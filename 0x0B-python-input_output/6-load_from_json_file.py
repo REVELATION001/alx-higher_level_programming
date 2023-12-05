@@ -4,5 +4,6 @@
 import json
 
 
-def from_json_string(my_str):
-    return json.loads(my_str)
+def load_from_json_file(filename):
+    with open(filename, "r", encoding="UTF-8") as f:
+        return json.load(f)
