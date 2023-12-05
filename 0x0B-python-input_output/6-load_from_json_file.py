@@ -1,9 +1,8 @@
 #!/usr/bin/python3
 
-
 import json
 
 
-def load_from_json_file(filename):
-    with open(filename, "r", encoding="UTF-8") as f:
-        return json.load(f)
+def from_json_string(my_str):
+    """ function that returns an Python data represented by a JSON """
+    return json.loads(my_str)
