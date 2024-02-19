@@ -1,19 +1,17 @@
 #!/usr/bin/python3
-
-
+"""  Write query that matches arges but safe SQL injection """
 import MySQLdb
-from sys import argv
+import sys
+
 
 if __name__ == "__main__":
-    database = MySQLdb.connect(user=argv[1],
-                               passwd=argv[2],
-                               db=argv[3])
-    curs = database.cursor()
-    curs.execute("SELECT * FROM states WHERE name\
-                  LIKE %s ORDER BY states.id\
-                  ASC", [argv[4]])
-    rows = curs.fetchall()
+    db = MySQLdb.connect(host="localhost", user=sys.argv[1],
+                         passwd=sys.argv[2], db=sys.argv[3], port=3306)
+    c = db.cursor()
+    match = sys.argv[4]
+    c.execute("SELECT * FROM states WHERE name LIKE %s", (match, ))
+    rows = c.fetchall()
     for row in rows:
         print(row)
-    curs.close()
-    database.close()
+    c.close()
+    db.close()
